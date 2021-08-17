@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>ShotzKotz</title>
+
+        <!-- Meta tags -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/game.css" media="all and (orientation:portrait)">
+        <link rel="stylesheet" href="assets/css/landscapeWarning.css" media="all and (orientation:landscape)">
+    
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <!-- Main game section -->
+        <section id="main">
+            <div id="startScreen">
+                <h2>Welcome!</h2>
+                <button id="startGameBtn">Start</button>
+                <h2 id="highscore"></h2>
+            </div>
+            <canvas id="game"></canvas>
+            <div id="endScreen">
+                <h2>Game Over</h2>
+                <h2 id="scoreText"></h2>
+                <button id="restartGameBtn">Erneut spielen</button>
+            </div>
+        </section>
+
+        <!-- Landscape warning -->
+        <section id="landscapeWarning">
+            <h2>Spiel funktioniert nicht im Querformat.</h2>
+            <h2>Bitte drehe das Gerät.</h2>
+        </section>
+
+        <!-- Javascript -->
+        <script src="assets/js/eventHandler.js"></script>
+        <script src="assets/js/sound.js"></script>
+        <script src="assets/js/player.js"></script>
+        <script src="assets/js/drinks.js"></script>
+        <script src="assets/js/heart.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/init.js"></script>
+    </body>
+</html>

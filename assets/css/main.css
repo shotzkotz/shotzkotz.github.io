@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+h2 {
+    font-family: 'Noto Sans JP', sans-serif;
+}
