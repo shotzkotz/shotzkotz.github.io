@@ -151,7 +151,8 @@ function main() {
                             jsonData[i] = jsonData[i-1];
                         }
                         else {
-                            jsonData[i] = ["name1", score];
+                            let name = document.getElementById("usernameInput").value;
+                            jsonData[i] = [name, score];
                         }
                     }
                 }
