@@ -41,3 +41,11 @@
     font-size: 24px;
     margin-top: 18px;
 }
+
+#leaderboard {
+    height: 100%;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

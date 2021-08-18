@@ -1,4 +1,4 @@
-function main(highscore) {
+function main() {
     // Declare some important variables
     let canvas = document.getElementById("game");
     let ctx = canvas.getContext("2d");
@@ -85,7 +85,7 @@ function main(highscore) {
                 else {
                     if (drink.constructor.name == "Shot") {
                         if (!playerSick) {
-                            score += 1;
+                            score += 100;
                             sound.score();
                         } else {
                             heartIndex = 3;
@@ -97,6 +97,7 @@ function main(highscore) {
                             hearts[heartIndex].changeStatus();
                             heartIndex += 1;
                             sound.damage();
+                            navigator.vibrate(10);
                         } else {
                             waterToDrink -= 1;
                             if (waterToDrink == 0) {
@@ -136,16 +137,30 @@ function main(highscore) {
                 document.getElementById("endScreen").style.display = "flex";
                 document.getElementById("scoreText").innerHTML = "Dein Score: " + String(score);
                 
-                // Save the highscore if it is higher than the previous one
-                if (score > highscore) {
-                    let data = {"highscore": score};
-                    data = JSON.stringify(data);
-
-                    let req = new XMLHttpRequest();
-                    req.open("PUT", "https://api.jsonbin.io/b/611aecfce1b0604017b19cc1", true);
-                    req.setRequestHeader("Content-Type", "application/json");
-                    req.send(data);
+                // Save the score
+                let scoreIndex = null;
+                for (i=1; i<=10; i++) {
+                    if (score > jsonData[i][1]) {
+                        scoreIndex = i;
+                        break;
+                    }
                 }
+                if (scoreIndex) {
+                    for (i=10; i>=scoreIndex; i--) {
+                        if (i != scoreIndex) {
+                            jsonData[i] = jsonData[i-1];
+                        }
+                        else {
+                            jsonData[i] = ["name1", score];
+                        }
+                    }
+                }
+                jsonData = JSON.stringify(jsonData);
+
+                let req = new XMLHttpRequest();
+                req.open("PUT", urlJSON.slice(0, urlJSON.length-7), true);
+                req.setRequestHeader("Content-Type", "application/json");
+                req.send(jsonData);
             }
         }   
     }

@@ -1,4 +1,6 @@
 const images = {}
+const urlJSON = "https://api.jsonbin.io/b/611cd3c2076a223676ad460e" + "/latest";
+var jsonData = null;
 
 function init() {
     // Resize the canvas according to the screen
@@ -14,10 +16,13 @@ function init() {
     // }
 
     // Fetch highscore datd and display it
-    let highscore = null;
-    $.getJSON('https://api.jsonbin.io/b/611aecfce1b0604017b19cc1/latest', function(data) {
-        highscore = data["highscore"];
-        document.getElementById("highscore").innerHTML = "Highscore: " + highscore;
+    $.getJSON(urlJSON, function(data) {
+        jsonData = data;
+        for (i = 1; i <= 10; i++) {
+            let li = document.createElement("li");
+            li.innerHTML = data[i]
+            document.getElementById("highscore").appendChild(li);
+        }
     });
 
     // Load all images
@@ -50,7 +55,7 @@ function init() {
         document.getElementById("startGameBtn").onclick = function() {
             document.getElementById("startScreen").style.display = "none";
             document.getElementById("game").style.display = "block";
-            main(highscore);
+            main();
         }
     }
 
@@ -58,8 +63,21 @@ function init() {
     document.getElementById("restartGameBtn").onclick = function() {
         document.getElementById("game").style.display = "block";
         document.getElementById("endScreen").style.display = "none";
-        main(highscore);
+        main();
+    }
+
+    // Add functionality to leaderboard button
+    document.getElementById("leaderboardBtn").onclick = function() {
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("leaderboard").style.display = "flex";
+    }
+
+    // Add functionality to the leaderboard back button
+    document.getElementById("leaderboardBackBtn").onclick = function() {
+        document.getElementById("startScreen").style.display = "flex";
+        document.getElementById("leaderboard").style.display = "none";
     }
 }
+
 
 init()
