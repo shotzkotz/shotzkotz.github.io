@@ -137,7 +137,7 @@ function main() {
                 document.getElementById("endScreen").style.display = "flex";
                 document.getElementById("scoreText").innerHTML = "Dein Score: " + String(score);
                 
-                // Save the score
+                // Get score and rank it in leaderboard
                 let scoreIndex = null;
                 for (i=1; i<=10; i++) {
                     if (score > jsonData[i][1]) {
@@ -156,8 +156,11 @@ function main() {
                         }
                     }
                 }
-                jsonData = JSON.stringify(jsonData);
 
+                jsonData["gamesPlayed"] += 1;
+
+                // Update the json file
+                jsonData = JSON.stringify(jsonData);
                 let req = new XMLHttpRequest();
                 req.open("PUT", urlJSON.slice(0, urlJSON.length-7), true);
                 req.setRequestHeader("Content-Type", "application/json");
