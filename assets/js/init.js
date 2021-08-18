@@ -15,6 +15,11 @@ function init() {
     //     }
     // }
 
+    // Display username if already in local storage
+    if (window.localStorage.getItem("name")) {
+        document.getElementById("usernameInput").value = window.localStorage.getItem("name");
+    }
+
     // Fetch highscore datd and display it
     $.getJSON(urlJSON, function(data) {
         jsonData = data;
@@ -55,6 +60,11 @@ function init() {
         document.getElementById("startGameBtn").onclick = function() {
             document.getElementById("startScreen").style.display = "none";
             document.getElementById("game").style.display = "block";
+
+            // Save the username in locaol storage
+            let name = document.getElementById("usernameInput").value;
+            window.localStorage.setItem("name", name);
+
             main();
         }
     }
