@@ -13,14 +13,35 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
+}
 
-    font-size: 30px;
+#startScreen h2 {
+    font-size: 42px;
+    margin-bottom: 48px;
+}
+
+#startScrenn h3 {
+    font-size: 22px;
+}
+
+#usernameInput {
+    width: 160px;
+    height: 30px;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 36px;
 }
 
 #startGameBtn, #leaderboardBtn {
     width: 160px;
     height: 42px;
     font-size: 24px;
+}
+
+#startGameBtn {
+    margin-bottom: 12px;
 }
 
 #endScreen {
