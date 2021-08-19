@@ -24,9 +24,17 @@ function init() {
     $.getJSON(urlJSON, function(data) {
         jsonData = data;
         for (i = 1; i <= 10; i++) {
-            let li = document.createElement("li");
-            li.innerHTML = String(data[i][1]) + " (" + data[i][0].trim() + ")";
-            document.getElementById("highscore").appendChild(li);
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.innerHTML = i;
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.innerHTML = data[i][0].trim();
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.innerHTML = data[i][1];
+            tr.appendChild(td);
+            document.getElementById("highscoreData").appendChild(tr);
         }
     });
 
