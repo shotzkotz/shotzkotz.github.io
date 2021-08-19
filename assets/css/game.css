@@ -14,13 +14,12 @@
     justify-content: center;
     align-items: center;
 
-    line-height: 2.5;
     font-size: 30px;
 }
 
-#startGameBtn {
-    width: 120px;
-    height: 36px;
+#startGameBtn, #leaderboardBtn {
+    width: 160px;
+    height: 42px;
     font-size: 24px;
 }
 

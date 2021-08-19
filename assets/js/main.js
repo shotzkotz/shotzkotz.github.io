@@ -97,7 +97,7 @@ function main() {
                             hearts[heartIndex].changeStatus();
                             heartIndex += 1;
                             sound.damage();
-                            navigator.vibrate(10);
+                            navigator.vibrate(200);
                         } else {
                             waterToDrink -= 1;
                             if (waterToDrink == 0) {
@@ -158,6 +158,12 @@ function main() {
                 }
 
                 jsonData["gamesPlayed"] += 1;
+
+                // Save in local storage if user already visited the website
+                if (!window.localStorage.getItem("visited")) {
+                    window.localStorage.setItem("visited", "true");
+                    jsonData["userCount"] += 1;
+                }
 
                 // Update the json file
                 jsonData = JSON.stringify(jsonData);
