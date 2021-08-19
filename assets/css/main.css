@@ -8,3 +8,14 @@ html, body {
 h2, h3 {
     font-family: 'Noto Sans JP', sans-serif;
 }
+
+button {
+    width: 170px;
+    height: 48px;
+    font-size: 24px;
+    box-shadow: 0 8px 16px 0 rgba(20, 20, 20, 0.7);
+    border-radius: 12px;
+    color: white;
+    background-color: rgb(35, 35, 35);
+    border: 1px solid black;
+}

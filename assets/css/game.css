@@ -34,7 +34,7 @@
 
 #startScreen h2 {
     font-size: 52px;
-    margin-bottom: 48px;
+    margin-bottom: 52px;
     color: white;
 }
 
@@ -44,18 +44,14 @@
 }
 
 #usernameInput {
-    width: 160px;
-    height: 30px;
+    width: 165px;
+    height: 36px;
     font-size: 20px;
     text-align: center;
-    margin-top: 8px;
-    margin-bottom: 36px;
-}
-
-#startGameBtn, #leaderboardBtn {
-    width: 160px;
-    height: 42px;
-    font-size: 24px;
+    margin-top: 14px;
+    margin-bottom: 48px;
+    border-radius: 6px;
+    border: 1px solid black;
 }
 
 #startGameBtn {
@@ -93,6 +89,7 @@
 
 #leaderboard h2 {
     font-size: 42px;
+    color: white;
 }
 
 #leaderboardBackBtn {
