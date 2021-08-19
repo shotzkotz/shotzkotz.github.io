@@ -6,6 +6,7 @@
     height: 100%;
 }
 
+/* ---- START SCREEN ---- */
 #startScreen {
     height: 100%;
 
@@ -44,6 +45,7 @@
     margin-bottom: 12px;
 }
 
+/* ---- END SCREEN ---- */
 #endScreen {
     height: 100%;
 
@@ -62,10 +64,30 @@
     margin-top: 18px;
 }
 
+/* ---- LEADERBOARD ---- */
 #leaderboard {
     height: 100%;
 
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#leaderboard h2 {
+    font-size: 42px;
+}
+
+#leaderboardBackBtn {
+    width: 160px;
+    height: 38px;
+    font-size: 24px;
+}
+
+#highscore {
+    margin: 24px 0;
+    font-size: 18px;
+}
+
+#highscore li {
+    margin: 7px 0;
 }

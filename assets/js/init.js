@@ -25,7 +25,7 @@ function init() {
         jsonData = data;
         for (i = 1; i <= 10; i++) {
             let li = document.createElement("li");
-            li.innerHTML = data[i]
+            li.innerHTML = String(data[i][1]) + " (" + data[i][0].trim() + ")";
             document.getElementById("highscore").appendChild(li);
         }
     });
