@@ -1,4 +1,4 @@
-#landscapeWarning, #game, #endScreen {
+#landscapeWarning, #game, #endScreen, #leaderboard {
     display: none;
 }
 
@@ -14,16 +14,33 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    padding-top: 30px;
+}
+
+#background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    background: urL("../img/bg.png") rgb(231, 231, 231);
+    background-blend-mode: multiply;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    transform: scale(1.1); 
 }
 
 #startScreen h2 {
-    font-size: 42px;
+    font-size: 52px;
     margin-bottom: 48px;
+    color: white;
 }
 
-#startScrenn h3 {
-    font-size: 22px;
+#startScreen h3 {
+    font-size: 14px;
+    color: white;
 }
 
 #usernameInput {
@@ -68,6 +85,7 @@
 #leaderboard {
     height: 100%;
 
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;

@@ -50,7 +50,7 @@ function main() {
 
     function draw() {
         // Draw the background
-        ctx.drawImage(images["bg"], -170, 0, images["bg"].width, window.innerHeight);
+        ctx.drawImage(images["bg"], -images["bg"].width/2+window.innerWidth/2, 0, images["bg"].width, window.innerHeight);
         ctx.fillStyle = "rgba(200, 200, 200, 0.1)"
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 

@@ -58,7 +58,7 @@ function init() {
     // Add functionality to the start game button
     function activateButton() {
         document.getElementById("startGameBtn").onclick = function() {
-            document.getElementById("startScreen").style.display = "none";
+            $("#startScreen").fadeOut(250);
             document.getElementById("game").style.display = "block";
 
             // Save the username in locaol storage
@@ -78,14 +78,16 @@ function init() {
 
     // Add functionality to leaderboard button
     document.getElementById("leaderboardBtn").onclick = function() {
-        document.getElementById("startScreen").style.display = "none";
-        document.getElementById("leaderboard").style.display = "flex";
+        $("#startScreen").fadeOut(250).promise().done(function() {
+            $("#leaderboard").hide().fadeIn(250);
+        });
     }
 
     // Add functionality to the leaderboard back button
     document.getElementById("leaderboardBackBtn").onclick = function() {
-        document.getElementById("startScreen").style.display = "flex";
-        document.getElementById("leaderboard").style.display = "none";
+        $("#leaderboard").fadeOut(250).promise().done(function() {
+            $("#startScreen").hide().fadeIn(250);
+        });
     }
 }
 
