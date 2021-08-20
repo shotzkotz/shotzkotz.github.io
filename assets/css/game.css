@@ -63,7 +63,7 @@
     font-size: 2.5em;
     top: 20px;
     right: 20px;
-    color: lightseagreen;
+    color: #009879;
 }
 
 /* ---- END SCREEN ---- */
@@ -89,7 +89,6 @@
 #leaderboard {
     height: 100%;
 
-    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
