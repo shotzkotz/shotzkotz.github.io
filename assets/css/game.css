@@ -1,4 +1,4 @@
-#landscapeWarning, #game, #endScreen, #leaderboard {
+#landscapeWarning, #game, #endScreen, #leaderboard, #rules {
     display: none;
 }
 
@@ -58,6 +58,14 @@
     margin-bottom: 12px;
 }
 
+#rulesBtn {
+    position: absolute;
+    font-size: 2.5em;
+    top: 20px;
+    right: 20px;
+    color: lightseagreen;
+}
+
 /* ---- END SCREEN ---- */
 #endScreen {
     height: 100%;
@@ -81,7 +89,7 @@
 #leaderboard {
     height: 100%;
 
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -129,4 +137,17 @@
 #highscoreTable tbody tr {
     background-color: #f3f3f3;
     border-bottom: 1px solid #aaa;
+}
+
+/* ---- RULES ---- */
+#rules {
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#rules h2 {
+    font-size: 42px;
+    color: white;
 }

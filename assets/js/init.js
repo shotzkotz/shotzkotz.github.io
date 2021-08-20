@@ -3,6 +3,8 @@ const urlJSON = "https://api.jsonbin.io/b/611cd3c2076a223676ad460e" + "/latest";
 var jsonData = null;
 
 function init() {
+    let fadeSpeed = 180;
+
     // Resize the canvas according to the screen
     let canvas = document.getElementById("game");
     canvas.width = window.innerWidth;
@@ -29,7 +31,8 @@ function init() {
             td.innerHTML = i;
             tr.appendChild(td);
             td = document.createElement("td");
-            td.innerHTML = data[i][0].trim();
+            td.innerHTML = data[i][0].trim().replace(/\s\s+/g, ' ');
+            td.style.textTransform = "capitalize";
             if (td.innerHTML == "") {
                 td.innerHTML = "<i>Anonymous</i>";
             }
@@ -69,7 +72,7 @@ function init() {
     // Add functionality to the start game button
     function activateButton() {
         document.getElementById("startGameBtn").onclick = function() {
-            $("#startScreen").fadeOut(250);
+            $("#startScreen").fadeOut(fadeSpeed);
             document.getElementById("game").style.display = "block";
 
             // Save the username in locaol storage
@@ -89,15 +92,31 @@ function init() {
 
     // Add functionality to leaderboard button
     document.getElementById("leaderboardBtn").onclick = function() {
-        $("#startScreen").fadeOut(180).promise().done(function() {
-            $("#leaderboard").hide().fadeIn(180);
+        $("#startScreen").fadeOut(fadeSpeed).promise().done(function() {
+            $("#leaderboard").css("display", "flex");
+            $("#leaderboard").hide().fadeIn(fadeSpeed);
         });
     }
 
     // Add functionality to the leaderboard back button
     document.getElementById("leaderboardBackBtn").onclick = function() {
-        $("#leaderboard").fadeOut(180).promise().done(function() {
-            $("#startScreen").hide().fadeIn(180);
+        $("#leaderboard").fadeOut(fadeSpeed).promise().done(function() {
+            $("#startScreen").hide().fadeIn(fadeSpeed);
+        });
+    }
+
+    // Add functionality to the rules button
+    document.getElementById("rulesBtn").onclick = function() {
+        $("#startScreen").fadeOut(fadeSpeed).promise().done(function() {
+            $("#rules").css("display", "flex");
+            $("#rules").hide().fadeIn(fadeSpeed);
+        });
+    }
+
+    // Add funtionality to the rules back button
+    document.getElementById("rulesBackBtn").onclick = function() {
+        $("#rules").fadeOut(fadeSpeed).promise().done(function() {
+            $("#startScreen").hide().fadeIn(fadeSpeed);
         });
     }
 }

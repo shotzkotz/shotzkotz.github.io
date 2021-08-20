@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="assets/css/game.css" media="all and (orientation:portrait)">
         <link rel="stylesheet" href="assets/css/landscapeWarning.css" media="all and (orientation:landscape)">
     
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
@@ -27,6 +30,7 @@
                 <input id ="usernameInput" type="text" placeholder="username">
                 <button id="startGameBtn">Spielen</button>
                 <button id="leaderboardBtn">Bestenliste</button>
+                <i id="rulesBtn" class="fa fa-question-circle"></i>
             </div>
             <canvas id="game"></canvas>
             <div id="endScreen">
@@ -46,6 +50,10 @@
                 </table>
                 <button id="leaderboardBackBtn">Zurück</button>
             </div>  
+            <div id="rules">
+                <h2>Rules</h2>
+                <button id="rulesBackBtn">Zurück</button>
+            </div>
         </section>
 
         <!-- Landscape warning -->
