@@ -7,7 +7,7 @@ class Drink {
             window.innerWidth/2,
             window.innerWidth/2 + window.innerWidth/3];
 
-        let scale = window.innerWidth / 3000;
+        let scale = window.innerWidth / 2400;
         this.sizeWidth = this.image.width * scale;
         this.sizeHeight = this.image.height * scale;
 

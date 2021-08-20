@@ -51,9 +51,9 @@ function main() {
     function draw() {
         // Draw the background
         let ratio = window.innerHeight/images["bg"].height;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
         ctx.drawImage(images["bg"], -(images["bg"].width*ratio)/2+window.innerWidth/2, 0, images["bg"].width*ratio, window.innerHeight);
-        ctx.fillStyle = "rgba(200, 200, 200, 0.1)"
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Draw the drinks
         drinks.forEach(drink => {
@@ -135,7 +135,8 @@ function main() {
             if (heartIndex == 3) {
                 gameOver = true;
                 document.getElementById("game").style.display = "none";
-                document.getElementById("endScreen").style.display = "flex";
+                $("#endScreen").hide().fadeIn(fadeSpeed);
+                $("#endScreen").css("display", "flex");
                 document.getElementById("scoreText").innerHTML = "Dein Score: " + String(score);
                 
                 // Get score and rank it in leaderboard

@@ -1,10 +1,10 @@
 const images = {}
 const urlJSON = "https://api.jsonbin.io/b/611cd3c2076a223676ad460e" + "/latest";
+const fadeSpeed = 180;
 var jsonData = null;
 
-function init() {
-    let fadeSpeed = 180;
 
+function init() {
     // Resize the canvas according to the screen
     let canvas = document.getElementById("game");
     canvas.width = window.innerWidth;
@@ -118,6 +118,13 @@ function init() {
         $("#rules").fadeOut(fadeSpeed).promise().done(function() {
             $("#startScreen").hide().fadeIn(fadeSpeed);
         });
+    }
+
+    // Add functionality to the main menu button
+    document.getElementById("mainMenuBtn").onclick = function() {
+        $("#endScreen").fadeOut(fadeSpeed).promise().done(function() {
+            $("#startScreen").hide().fadeIn(fadeSpeed);
+        })
     }
 }
 
