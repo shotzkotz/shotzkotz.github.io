@@ -30,6 +30,9 @@ function init() {
             tr.appendChild(td);
             td = document.createElement("td");
             td.innerHTML = data[i][0].trim();
+            if (td.innerHTML == "") {
+                td.innerHTML = "<i>Anonymous</i>";
+            }
             tr.appendChild(td);
             td = document.createElement("td");
             td.innerHTML = data[i][1];
@@ -86,15 +89,15 @@ function init() {
 
     // Add functionality to leaderboard button
     document.getElementById("leaderboardBtn").onclick = function() {
-        $("#startScreen").fadeOut(250).promise().done(function() {
-            $("#leaderboard").hide().fadeIn(250);
+        $("#startScreen").fadeOut(180).promise().done(function() {
+            $("#leaderboard").hide().fadeIn(180);
         });
     }
 
     // Add functionality to the leaderboard back button
     document.getElementById("leaderboardBackBtn").onclick = function() {
-        $("#leaderboard").fadeOut(250).promise().done(function() {
-            $("#startScreen").hide().fadeIn(250);
+        $("#leaderboard").fadeOut(180).promise().done(function() {
+            $("#startScreen").hide().fadeIn(180);
         });
     }
 }
