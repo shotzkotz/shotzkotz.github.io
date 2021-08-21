@@ -153,3 +153,11 @@
     font-size: 42px;
     color: white;
 }
+
+#rulesTxt {
+    background-color: wheat;
+    padding: 40px 40px;
+    margin: 32px 54px;
+    border-radius: 6px;
+    line-height: 2;
+}
