@@ -51,6 +51,11 @@
     border: 1px solid black;
 }
 
+#usernameInput:focus {
+    outline: none;
+    border: 2px solid #111;
+}
+
 #startGameBtn {
     margin-bottom: 12px;
 }
