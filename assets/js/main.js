@@ -185,10 +185,7 @@ function main() {
     }
 }
 
-function generateDrinks(speed) {
-    //! ONLY FOR TESTING
-    return [new Water(0, speed), new Shot(1, speed), new DeadlyShot(2, speed)] 
-
+function generateDrinks(speed) { 
     let drinks = [];
 
     while (true) {

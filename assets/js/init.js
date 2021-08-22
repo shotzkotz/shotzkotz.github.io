@@ -45,6 +45,26 @@ function init() {
         }
     });
 
+    // Stop changing to landscape orientation when the keyboard is open
+    let usernameInput = document.getElementById("usernameInput");
+    let landscapeCssDisabled = false;
+
+    usernameInput.addEventListener("focus", function() {
+        document.getElementsByTagName("link")[6].disabled = true;
+        landscapeCssDisabled = true;
+    });
+
+    usernameInput.addEventListener("blur", function() {
+        document.getElementsByTagName("link")[6].disabled = false;
+        landscapeCssDisabled = false;
+    });
+
+    window.addEventListener("orientationchange", function() {
+        if (landscapeCssDisabled) {
+            document.getElementsByTagName("link")[6].disabled = false;
+        }
+    });
+
     // Load all images
     let imagesLoaded = 0;
     let imageLinks = [
