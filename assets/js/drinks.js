@@ -7,11 +7,11 @@ class Drink {
             window.innerWidth/2,
             window.innerWidth/2 + window.innerWidth/3];
 
-        let scale = window.innerWidth / 2400;
+        let scale = window.innerWidth/2500;
         this.sizeWidth = this.image.width * scale;
         this.sizeHeight = this.image.height * scale;
 
-        this.x = this.xPositions[pos]  - this.sizeWidth/2;
+        this.x = this.xPositions[pos] - this.sizeWidth/2;
         this.y = -200;
 
         this.speed = speed;

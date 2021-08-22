@@ -6,7 +6,7 @@ function main() {
     let hearts = [new Heart(0), new Heart(1), new Heart(2)];
     let heartIndex = 0;
     let score = 0;
-    let speed = 10;
+    let speed = 8;
     let gameOver = false;
     let playerSick = false;
     let waterToDrink = null;
@@ -186,6 +186,9 @@ function main() {
 }
 
 function generateDrinks(speed) {
+    //! ONLY FOR TESTING
+    return [new Water(0, speed), new Shot(1, speed), new DeadlyShot(2, speed)] 
+
     let drinks = [];
 
     while (true) {
