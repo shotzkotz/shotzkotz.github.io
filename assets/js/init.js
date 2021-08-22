@@ -1,5 +1,5 @@
 const images = {}
-const urlJSON = "https://api.jsonbin.io/b/611cd3c2076a223676ad460e" + "/latest";
+const urlJSON = "https://api.jsonbin.io/b/6122b47c076a223676af95cf" + "/latest";
 const fadeSpeed = 220;
 
 var jsonData = null;
@@ -18,53 +18,10 @@ function init() {
     //     }
     // }
 
-    // Display username if already in local storage
-    if (window.localStorage.getItem("name")) {
-        document.getElementById("usernameInput").value = window.localStorage.getItem("name");
-    }
-
     // Fetch highscore datd and display it
     $.getJSON(urlJSON, function(data) {
         jsonData = data;
-        for (i = 1; i <= 10; i++) {
-            let tr = document.createElement("tr");
-            let td = document.createElement("td");
-            td.innerHTML = i;
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.innerHTML = data[i][0].trim().replace(/\s\s+/g, ' ');
-            td.style.textTransform = "capitalize";
-            if (td.innerHTML == "") {
-                td.innerHTML = "<i>Anonymous</i>";
-            }
-            tr.appendChild(td);
-            td = document.createElement("td");
-            td.innerHTML = data[i][1];
-            tr.appendChild(td);
-            document.getElementById("highscoreData").appendChild(tr);
-        }
-    });
-
-    // Stop changing to landscape orientation when the keyboard is open
-    let usernameInput = document.getElementById("usernameInput");
-    let landscapeCssDisabled = false;
-
-    usernameInput.addEventListener("focus", function() {
-        document.getElementsByTagName("link")[6].disabled = false;
-        document.getElementsByTagName("link")[7].disabled = true;
-        landscapeCssDisabled = true;
-    });
-
-    usernameInput.addEventListener("blur", function() {
-        document.getElementsByTagName("link")[6].disabled = true;
-        document.getElementsByTagName("link")[7].disabled = false;
-        landscapeCssDisabled = false;
-    });
-
-    window.addEventListener("orientationchange", function() {
-        if (landscapeCssDisabled) {
-            document.getElementsByTagName("link")[6].disabled = false;
-        }
+        document.getElementById("highscoreTxt").innerHTML = "Highscore: " + jsonData["highscore"];
     });
 
     // Load all images
@@ -97,11 +54,6 @@ function init() {
         document.getElementById("startGameBtn").onclick = function() {
             $("#startScreen").fadeOut(fadeSpeed);
             document.getElementById("game").style.display = "block";
-
-            // Save the username in locaol storage
-            let name = document.getElementById("usernameInput").value;
-            window.localStorage.setItem("name", name);
-
             main();
         }
     }
@@ -111,21 +63,6 @@ function init() {
         document.getElementById("game").style.display = "block";
         document.getElementById("endScreen").style.display = "none";
         main();
-    }
-
-    // Add functionality to leaderboard button
-    document.getElementById("leaderboardBtn").onclick = function() {
-        $("#startScreen").fadeOut(fadeSpeed).promise().done(function() {
-            $("#leaderboard").css("display", "flex");
-            $("#leaderboard").hide().fadeIn(fadeSpeed);
-        });
-    }
-
-    // Add functionality to the leaderboard back button
-    document.getElementById("leaderboardBackBtn").onclick = function() {
-        $("#leaderboard").fadeOut(fadeSpeed).promise().done(function() {
-            $("#startScreen").hide().fadeIn(fadeSpeed);
-        });
     }
 
     // Add functionality to the rules button

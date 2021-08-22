@@ -13,9 +13,7 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/startScreen.css">
         <link rel="stylesheet" href="assets/css/endScreen.css">
-        <link rel="stylesheet" href="assets/css/leaderboard.css">
         <link rel="stylesheet" href="assets/css/rules.css">
-        <link rel="stylesheet" href="assets/css/keyboard.css" disabled="true">
         <link rel="stylesheet" href="assets/css/landscapeWarning.css" media="all and (orientation:landscape)">
     
         <!-- Icons -->
@@ -31,10 +29,8 @@
             <div id="background"></div>
             <div id="startScreen">
                 <h2>Shotz Kotz</h2>
-                <h3><i>Gib deinen Namen ein:</i></h3>
-                <input id ="usernameInput" type="text" placeholder="username">
                 <button id="startGameBtn">Spielen</button>
-                <button id="leaderboardBtn">Bestenliste</button>
+                <h3 id="highscoreTxt"></h3>
                 <i id="rulesBtn" class="fa fa-question-circle"></i>
             </div>
             <canvas id="game"></canvas>

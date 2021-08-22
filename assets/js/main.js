@@ -11,6 +11,9 @@ function main() {
     let playerSick = false;
     let waterToDrink = null;
 
+    // Fetch the highscore
+    let highscore = jsonData["highscore"];
+
     // Activate the sound class
     let sound = new Sound();
 
@@ -144,35 +147,14 @@ function main() {
                 $("#endScreen").hide().fadeIn(fadeSpeed);
                 $("#endScreen").css("display", "flex");
                 document.getElementById("scoreText").innerHTML = "Dein Score: " + String(score);
-                
-                // Get score and rank it in leaderboard
-                let scoreIndex = null;
-                for (i=1; i<=10; i++) {
-                    if (score > jsonData[i][1]) {
-                        scoreIndex = i;
-                        break;
-                    }
-                }
-                if (scoreIndex) {
-                    for (i=10; i>=scoreIndex; i--) {
-                        if (i != scoreIndex) {
-                            jsonData[i] = jsonData[i-1];
-                        }
-                        else {
-                            let name = document.getElementById("usernameInput").value;
-                            jsonData[i] = [name, score];
-                        }
-                    }
+
+                // Save new highscore if beaten
+                if (score > highscore) {
+                    jsonData["highscore"] = score;
                 }
 
-                // Update the count of played games in json file
-                jsonData["gamesPlayed"] += 1;
-
-                // Save in local storage if user already visited the website
-                if (!window.localStorage.getItem("visited")) {
-                    window.localStorage.setItem("visited", "true");
-                    jsonData["userCount"] += 1;
-                }
+                // Update the highscore element
+                document.getElementById("highscoreTxt").innerHTML = "Highscore: " + jsonData["highscore"];
 
                 // Update the json file
                 jsonData = JSON.stringify(jsonData);
