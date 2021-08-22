@@ -50,12 +50,14 @@ function init() {
     let landscapeCssDisabled = false;
 
     usernameInput.addEventListener("focus", function() {
-        document.getElementsByTagName("link")[6].disabled = true;
+        document.getElementsByTagName("link")[6].disabled = false;
+        document.getElementsByTagName("link")[7].disabled = true;
         landscapeCssDisabled = true;
     });
 
     usernameInput.addEventListener("blur", function() {
-        document.getElementsByTagName("link")[6].disabled = false;
+        document.getElementsByTagName("link")[6].disabled = true;
+        document.getElementsByTagName("link")[7].disabled = false;
         landscapeCssDisabled = false;
     });
 
