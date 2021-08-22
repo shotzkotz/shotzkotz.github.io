@@ -1,22 +1,32 @@
 class Sound {
     constructor() {
-        this.damageSound = new Audio("assets/audio/damage.wav");
-        this.scoreSound = new Audio("assets/audio/score.mp3");
-        this.waterSound = new Audio("assets/audio/water.mp3");
+        this.sounds = {
+            "damageSound": new Audio("assets/audio/damage.wav"),
+            "scoreSound": new Audio("assets/audio/score.mp3"),
+            "waterSound": new Audio("assets/audio/water.mp3")
+        };
+        this.setVolume(0);
     }
 
     damage() {
-        this.damageSound.currentTime = 0;
-        this.damageSound.play();
+        this.sounds["damageSound"].currentTime = 0;
+        this.sounds["damageSound"].play();
     }
 
     score() {
-        this.scoreSound.currentTime = 0;
-        this.scoreSound.play();
+        this.sounds["scoreSound"].currentTime = 0;
+        this.sounds["scoreSound"].play();
     }
 
     water() {
-        this.waterSound.currentTime = 0;
-        this.waterSound.play();
+        this.sounds["waterSound"].currentTime = 0;
+        this.sounds["waterSound"].play();
     }
+
+    setVolume(volume) {
+        for (const [key, value] of Object.entries(this.sounds)) {
+            value.volume = volume;
+        }
+    }
+
 }
