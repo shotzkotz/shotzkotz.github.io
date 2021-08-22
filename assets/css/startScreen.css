@@ -1,0 +1,48 @@
+#startScreen {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+
+#startScreen h2 {
+    font-size: 52px;
+    margin-bottom: 52px;
+    color: white;
+}
+
+#startScreen h3 {
+    font-size: 14px;
+    color: white;
+}
+
+#usernameInput {
+    width: 165px;
+    height: 36px;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 14px;
+    margin-bottom: 48px;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+#usernameInput:focus {
+    outline: none;
+    border: 2px solid #111;
+}
+
+#startGameBtn {
+    margin-bottom: 12px;
+}
+
+#rulesBtn {
+    position: absolute;
+    font-size: 2.5em;
+    top: 20px;
+    right: 20px;
+    color: #009879; 
+}

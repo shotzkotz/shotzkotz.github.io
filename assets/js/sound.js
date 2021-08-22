@@ -2,8 +2,8 @@ class Sound {
     constructor() {
         this.sounds = {
             "damageSound": new Audio("assets/audio/damage.wav"),
-            "scoreSound": new Audio("assets/audio/score.mp3"),
-            "waterSound": new Audio("assets/audio/water.mp3")
+            "scoreSound": new Audio("assets/audio/score.wav"),
+            "waterSound": new Audio("assets/audio/water.wav")
         };
         this.setVolume(0);
     }

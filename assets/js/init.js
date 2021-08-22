@@ -1,6 +1,7 @@
 const images = {}
 const urlJSON = "https://api.jsonbin.io/b/611cd3c2076a223676ad460e" + "/latest";
 const fadeSpeed = 220;
+
 var jsonData = null;
 
 
@@ -127,6 +128,5 @@ function init() {
         })
     }
 }
-
 
 init()

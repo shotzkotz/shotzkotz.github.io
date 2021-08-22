@@ -1,0 +1,51 @@
+#leaderboard {
+    height: 100%;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#leaderboard h2 {
+    font-size: 42px;
+    color: white;
+}
+
+#leaderboardBackBtn {
+    width: 160px;
+    height: 38px;
+    font-size: 24px;
+}
+
+#highscore {
+    margin: 24px 0;
+    font-size: 18px;
+}
+
+#highscore li {
+    margin: 7px 0;
+}
+
+#highscoreTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+#highscoreTable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+#highscoreTable th,
+#highscoreTable td {
+    padding: 12px 15px;
+}
+
+#highscoreTable tbody tr {
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #aaa;
+}

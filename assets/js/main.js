@@ -5,10 +5,8 @@ function main() {
     let player = new Player();
     let hearts = [new Heart(0), new Heart(1), new Heart(2)];
     let heartIndex = 0;
-    let drinks = [];
     let score = 0;
     let speed = 10;
-    let height = null;
     let gameOver = false;
     let playerSick = false;
     let waterToDrink = null;
@@ -20,10 +18,10 @@ function main() {
     eventHandler(player);
 
     // Generate the first drink wave
-    drinks = generateDrinks(speed);
+    let drinks = generateDrinks(speed);
 
     // Save some information for the waves
-    height = drinks[0].y;
+    let height = drinks[0].y;
 
     // Some variables for delta time
     const perfectFrameTime = 1000 / 40;
@@ -33,16 +31,20 @@ function main() {
     // Start the main game loop
     window.requestAnimationFrame(gameLoop);
     function gameLoop(timestamp) {
+        // Update delta time variables
         if (lastTimestamp == 0) {
             deltaTime = 0;
-        } else {
+        }
+        else {
             deltaTime = (timestamp - lastTimestamp) / perfectFrameTime;
         }
         lastTimestamp = timestamp;
 
+        // Draw & update the game components
         draw();
         update(deltaTime);
 
+        // Continue the game unitl it is over
         if (!gameOver) {
             window.requestAnimationFrame(gameLoop);
         }
@@ -75,6 +77,7 @@ function main() {
     }
 
     function update(dt) {
+        // Only update the game when the device is in portrait mode
         if (window.innerHeight > window.innerWidth) {
             // Update the drink position
             let updatedDrinks = [];
@@ -84,6 +87,7 @@ function main() {
                     updatedDrinks.push(drink);
                 }
                 else {
+                    // Check which drink hit the player
                     if (drink.constructor.name == "Shot") {
                         if (!playerSick) {
                             score += 100;
@@ -121,6 +125,8 @@ function main() {
                     }
                 }
             });
+
+            // Update the position of the drinks and the drinks itself
             height += speed * dt;
             drinks = updatedDrinks;
 
@@ -159,6 +165,7 @@ function main() {
                     }
                 }
 
+                // Update the count of played games in json file
                 jsonData["gamesPlayed"] += 1;
 
                 // Save in local storage if user already visited the website
@@ -203,6 +210,7 @@ function generateDrinks(speed) {
     }
     return drinks;
 
+    // Check the pattern of the drinks
     function checkDrinks(drinks) {
         let waterCount = 0;
         let shotCount = 0;
