@@ -11,6 +11,8 @@ function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    let activateButtonCalled = 0;
+
     // Add warning before refresh
     // window.onbeforeunload = function () {
     //     if (canvas.style.display == "block") {
@@ -22,6 +24,8 @@ function init() {
     $.getJSON(urlJSON, function(data) {
         jsonData = data;
         document.getElementById("highscoreTxt").innerHTML = "Highscore: " + jsonData["highscore"];
+    }).done(function() {
+        activateButton();
     });
 
     // Load all images
@@ -51,10 +55,13 @@ function init() {
 
     // Add functionality to the start game button
     function activateButton() {
-        document.getElementById("startGameBtn").onclick = function() {
-            $("#startScreen").fadeOut(fadeSpeed);
-            document.getElementById("game").style.display = "block";
-            main();
+        activateButtonCalled += 1;
+        if (activateButtonCalled == 2) {
+            document.getElementById("startGameBtn").onclick = function() {
+                $("#startScreen").fadeOut(fadeSpeed);
+                document.getElementById("game").style.display = "block";
+                main();
+            }
         }
     }
 
