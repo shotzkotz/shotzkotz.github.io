@@ -14,6 +14,11 @@ function main() {
     let alpha = 0;
     let transitionSpeed = 0.02;
 
+    // Make sure json data is not a string
+    if (typeof(jsonData) == "string") {
+        jsonData = JSON.parse(jsonData);
+    }
+
     // Fetch the highscore
     let highscore = jsonData["highscore"];
 
@@ -173,13 +178,14 @@ function main() {
                 }
 
                 // Update the highscore element
-                document.getElementById("highscoreTxt").innerHTML = "Highscore: " + jsonData["highscore"];
+                document.getElementById("highscoreTxt").innerHTML = "Highscore: " + highscore;
 
                 // Update the json file
                 jsonData = JSON.stringify(jsonData);
                 let req = new XMLHttpRequest();
                 req.open("PUT", urlJSON.slice(0, urlJSON.length-7), true);
                 req.setRequestHeader("Content-Type", "application/json");
+                console.log(jsonData);
                 req.send(jsonData);
             }
         }   

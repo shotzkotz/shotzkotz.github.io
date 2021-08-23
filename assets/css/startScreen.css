@@ -10,36 +10,21 @@
 
 #startScreen h2 {
     font-size: 52px;
-    margin-bottom: 52px;
     color: white;
 }
 
 #startScreen h3 {
-    font-size: 14px;
-    color: white;
-}
-
-#usernameInput {
-    width: 165px;
-    height: 36px;
-    font-size: 20px;
-    text-align: center;
-    margin-top: 14px;
-    margin-bottom: 48px;
-    border-radius: 6px;
-    border: 1px solid black;
-}
-
-#usernameInput:focus {
-    outline: none;
-    border: 2px solid #111;
+    font-size: 24px;
+    margin-top: 36px;
+    margin-bottom: 36px;
+    color: black;
+    border-radius: 5px;
 }
 
 #startGameBtn {
     font-size: 28px;
     text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 12px;
     opacity: 0.6;
 }
 
