@@ -1,5 +1,5 @@
 const images = {}
-const urlJSON = "https://api.jsonbin.io/b/6122b47c076a223676af95cf" + "/latest";
+const urlJSON = "https://api.jsonbin.io/b/6123a96c076a223676afef57" + "/latest";
 const fadeSpeed = 220;
 
 var jsonData = null;
@@ -14,11 +14,11 @@ function init() {
     let activateButtonCalled = 0;
 
     // Add warning before refresh
-    // window.onbeforeunload = function () {
-    //     if (canvas.style.display == "block") {
-    //         return "Willst du die Seite wirklich neu laden?";
-    //     }
-    // }
+    window.onbeforeunload = function () {
+        if (canvas.style.display == "block") {
+            return "Willst du die Seite wirklich neu laden?";
+        }
+    }
 
     // Fetch highscore datd and display it
     $.getJSON(urlJSON, function(data) {

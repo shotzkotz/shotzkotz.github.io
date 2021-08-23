@@ -111,7 +111,7 @@ function main() {
                     // Check which drink hit the player
                     if (drink.constructor.name == "Shot") {
                         if (!playerSick) {
-                            score += 500;
+                            score += 1;
                         } else {
                             heartIndex = 3;
                         }
