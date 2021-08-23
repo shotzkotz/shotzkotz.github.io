@@ -185,7 +185,6 @@ function main() {
                 let req = new XMLHttpRequest();
                 req.open("PUT", urlJSON.slice(0, urlJSON.length-7), true);
                 req.setRequestHeader("Content-Type", "application/json");
-                console.log(jsonData);
                 req.send(jsonData);
             }
         }   
