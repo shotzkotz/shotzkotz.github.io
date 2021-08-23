@@ -111,7 +111,7 @@ function main() {
                     // Check which drink hit the player
                     if (drink.constructor.name == "Shot") {
                         if (!playerSick) {
-                            score += 10;
+                            score += 1;
                         } else {
                             heartIndex = 3;
                         }
@@ -177,7 +177,6 @@ function main() {
                 if (score > highscore) {
                     jsonData["highscore"] = score;
                     document.getElementById("highscoreTxt").innerHTML = "Highscore: " + score;
-                    alert(document.getElementById("highscoreTxt").innerHTML)
                     $("#newHighscoreTxt").css("display", "block");
                 } else {
                     $("#newHighscoreTxt").css("display",  "none");
