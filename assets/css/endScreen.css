@@ -14,6 +14,14 @@
     font-size: 52px;
 }
 
+#endScreen #newHighscoreTxt {
+    display: none;
+    font-size: 18px;
+    color: darkred;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-transform: uppercase;
+}
+
 #restartGameBtn {
     margin-top: 18px;
     margin-bottom: 24px;

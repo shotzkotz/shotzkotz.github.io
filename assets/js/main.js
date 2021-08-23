@@ -50,6 +50,14 @@ function main() {
         }
         lastTimestamp = timestamp;
 
+        // Upadte the alpha for transitions
+        if (alpha < 1 && !gameOver) {
+            alpha += transitionSpeed;
+        }
+        else if (!gameOver) {
+            alpha = 1;
+        }
+
         // Draw & update the game components
         draw();
         if (alpha == 1) {
@@ -64,16 +72,8 @@ function main() {
 
     function draw() {
         // Make a transition
-        document.getElementById("canvasScore").style.display = "block";
-        if (alpha < 1) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.globalAlpha = alpha;
-            alpha += transitionSpeed;
-            document.getElementById("canvasScore").style.opacity = alpha;
-        }
-        else {
-            alpha = 1;
-        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = alpha;
 
         // Draw the background
         let ratio = window.innerHeight/images["bg"].height;
@@ -91,6 +91,10 @@ function main() {
         hearts.forEach(heart => {
             heart.draw(ctx);
         });
+
+        // Draw the score
+        document.getElementById("canvasScore").style.display = "block";
+        document.getElementById("canvasScore").style.opacity = alpha;
     }
 
     function update(dt) {
@@ -107,7 +111,7 @@ function main() {
                     // Check which drink hit the player
                     if (drink.constructor.name == "Shot") {
                         if (!playerSick) {
-                            score += 1;
+                            score += 500;
                         } else {
                             heartIndex = 3;
                         }
@@ -156,13 +160,14 @@ function main() {
 
             // Check if the game is over
             if (heartIndex == 3) {
-                navigator.vibrate(vibrateDuration*5);
                 gameOver = true;
+                navigator.vibrate(vibrateDuration*4);
 
                 // Hide and reset score text
                 document.getElementById("canvasScore").innerHTML = "Score: 0";
                 document.getElementById("canvasScore").style.display = "none";
 
+                // Fade in the endscreen
                 document.getElementById("game").style.display = "none";
                 $("#endScreen").hide().fadeIn(fadeSpeed);
                 $("#endScreen").css("display", "flex");
@@ -171,6 +176,9 @@ function main() {
                 // Save new highscore if beaten
                 if (score > highscore) {
                     jsonData["highscore"] = score;
+                    $("#newHighscoreTxt").css("display", "block");
+                } else {
+                    $("#newHighscoreTxt").css("display",  "none");
                 }
 
                 // Update the highscore element
@@ -232,4 +240,3 @@ function generateDrinks(speed) {
         return false;
     }
 }
-

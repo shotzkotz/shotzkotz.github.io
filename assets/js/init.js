@@ -64,9 +64,10 @@ function init() {
 
     // Add funtionality to start game button
     document.getElementById("startGameBtn").onclick = function() {
-        $("#startScreen").fadeOut(fadeSpeed);
-        document.getElementById("game").style.display = "block";
-        main();
+        $("#startScreen").fadeOut(fadeSpeed).promise().done(function() {
+            document.getElementById("game").style.display = "block";
+            main();
+        });
     }
 
     // Add functionality to the restart game button
