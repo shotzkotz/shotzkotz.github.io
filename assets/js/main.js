@@ -11,6 +11,8 @@ function main() {
     let playerSick = false;
     let waterToDrink = null;
     let vibrateDuration = 80;
+    let alpha = 0;
+    let transitionSpeed = 0.02;
 
     // Fetch the highscore
     let highscore = jsonData["highscore"];
@@ -46,7 +48,9 @@ function main() {
 
         // Draw & update the game components
         draw();
-        update(deltaTime);
+        if (alpha == 1) {
+            update(deltaTime);
+        }
 
         // Continue the game unitl it is over
         if (!gameOver) {
@@ -55,10 +59,18 @@ function main() {
     }
 
     function draw() {
+        // Make a transition
+        if (alpha < 1) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = alpha;
+            alpha += transitionSpeed;
+        }
+        else {
+            alpha = 1;
+        }
+
         // Draw the background
         let ratio = window.innerHeight/images["bg"].height;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.globalAlpha = 1;
         ctx.drawImage(images["bg"], -(images["bg"].width*ratio)/2+window.innerWidth/2, 0, images["bg"].width*ratio, window.innerHeight);
 
         // Draw the drinks
