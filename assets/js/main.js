@@ -176,13 +176,11 @@ function main() {
                 // Save new highscore if beaten
                 if (score > highscore) {
                     jsonData["highscore"] = score;
+                    document.getElementById("highscoreTxt").innerHTML = "Highscore: " + score;
                     $("#newHighscoreTxt").css("display", "block");
                 } else {
                     $("#newHighscoreTxt").css("display",  "none");
                 }
-
-                // Update the highscore element
-                document.getElementById("highscoreTxt").innerHTML = "Highscore: " + score;
 
                 // Update the json file
                 jsonData = JSON.stringify(jsonData);
