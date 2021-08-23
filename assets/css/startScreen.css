@@ -36,6 +36,9 @@
 }
 
 #startGameBtn {
+    font-size: 28px;
+    text-transform: uppercase;
+    font-weight: 700;
     margin-bottom: 12px;
     opacity: 0.6;
 }

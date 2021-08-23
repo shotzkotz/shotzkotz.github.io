@@ -11,8 +11,8 @@ h2, h3, table {
 }
 
 button {
-    width: 170px;
-    height: 48px;
+    width: 200px;
+    height: 52px;
     font-size: 24px;
     box-shadow: 0 8px 16px 0 rgba(20, 20, 20, 0.7);
     border-radius: 12px;
@@ -41,4 +41,14 @@ button {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* ----- CANVAS ----- */
+#canvasScore {
+    display: none;
+    position: absolute;
+    color: white;
+    font-size: 1.6em;
+    top: 15px;
+    left: 15px;
 }

@@ -60,10 +60,12 @@ function main() {
 
     function draw() {
         // Make a transition
+        document.getElementById("canvasScore").style.display = "block";
         if (alpha < 1) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.globalAlpha = alpha;
             alpha += transitionSpeed;
+            document.getElementById("canvasScore").style.opacity = alpha;
         }
         else {
             alpha = 1;
@@ -85,11 +87,6 @@ function main() {
         hearts.forEach(heart => {
             heart.draw(ctx);
         });
-
-        // Draw the score
-        ctx.font = "160% Arial";
-        ctx.fillStyle = "#eee";
-        ctx.fillText("Score: " + String(score), 10, 30);
     }
 
     function update(dt) {
@@ -142,6 +139,9 @@ function main() {
                 }
             });
 
+            // Update the score
+            document.getElementById("canvasScore").innerHTML = "Score: " + score;
+
             // Update the position of the drinks and the drinks itself
             height += speed * dt;
             drinks = updatedDrinks;
@@ -157,6 +157,11 @@ function main() {
             if (heartIndex == 3) {
                 navigator.vibrate(vibrateDuration*5);
                 gameOver = true;
+
+                // Hide and reset score text
+                document.getElementById("canvasScore").innerHTML = "Score: 0";
+                document.getElementById("canvasScore").style.display = "none";
+
                 document.getElementById("game").style.display = "none";
                 $("#endScreen").hide().fadeIn(fadeSpeed);
                 $("#endScreen").css("display", "flex");
