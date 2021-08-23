@@ -10,6 +10,7 @@ function main() {
     let gameOver = false;
     let playerSick = false;
     let waterToDrink = null;
+    let vibrateDuration = 80;
 
     // Fetch the highscore
     let highscore = jsonData["highscore"];
@@ -93,7 +94,7 @@ function main() {
                     // Check which drink hit the player
                     if (drink.constructor.name == "Shot") {
                         if (!playerSick) {
-                            score += 100;
+                            score += 1;
                             sound.score();
                         } else {
                             heartIndex = 3;
@@ -105,7 +106,7 @@ function main() {
                             hearts[heartIndex].changeStatus();
                             heartIndex += 1;
                             sound.damage();
-                            navigator.vibrate(200);
+                            navigator.vibrate(vibrateDuration);
                         } else {
                             waterToDrink -= 1;
                             if (waterToDrink == 0) {
@@ -142,6 +143,7 @@ function main() {
 
             // Check if the game is over
             if (heartIndex == 3) {
+                navigator.vibrate(vibrateDuration*5);
                 gameOver = true;
                 document.getElementById("game").style.display = "none";
                 $("#endScreen").hide().fadeIn(fadeSpeed);
