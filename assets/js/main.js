@@ -22,9 +22,6 @@ function main() {
     // Fetch the highscore
     let highscore = jsonData["highscore"];
 
-    // Activate the sound class
-    let sound = new Sound();
-
     // Activate the event handler
     eventHandler(player);
 
@@ -109,17 +106,14 @@ function main() {
                     if (drink.constructor.name == "Shot") {
                         if (!playerSick) {
                             score += 1;
-                            sound.score();
                         } else {
                             heartIndex = 3;
-                            sound.damage();
                         }
                     }
                     else if (drink.constructor.name == "Water") {
                         if (!playerSick) {
                             hearts[heartIndex].changeStatus();
                             heartIndex += 1;
-                            sound.damage();
                             navigator.vibrate(vibrateDuration);
                         } else {
                             waterToDrink -= 1;
@@ -127,7 +121,6 @@ function main() {
                                 playerSick = false;
                                 player.image = images["player"];
                             }
-                            sound.water();
                         }
                     }
                     else if (drink.constructor.name == "DeadlyShot") {
@@ -138,7 +131,6 @@ function main() {
                             waterToDrink = Math.floor(Math.random() * (5 - 2 + 1) ) + 2;
                         } else {
                             heartIndex = 3;
-                            sound.damage();
                         }       
                     }
                 }
