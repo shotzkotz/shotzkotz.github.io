@@ -182,7 +182,7 @@ function main() {
                 }
 
                 // Update the highscore element
-                document.getElementById("highscoreTxt").innerHTML = "Highscore: " + highscore;
+                document.getElementById("highscoreTxt").innerHTML = "Highscore: " + score;
 
                 // Update the json file
                 jsonData = JSON.stringify(jsonData);
