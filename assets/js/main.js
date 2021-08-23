@@ -7,6 +7,8 @@ function main() {
     let heartIndex = 0;
     let score = 0;
     let speed = 8;
+    let speedMax = 16;
+    let speedIncr = 0.3;
     let gameOver = false;
     let playerSick = false;
     let waterToDrink = null;
@@ -147,7 +149,9 @@ function main() {
             if (height > 1000) {
                 drinks = generateDrinks(speed);
                 height = drinks[0].y;
-                speed += 0.5;
+                if (speed < speedMax) {
+                    speed += speedIncr;
+                }     
             }
 
             // Check if the game is over
