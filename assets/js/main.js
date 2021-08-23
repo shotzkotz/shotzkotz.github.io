@@ -10,7 +10,7 @@ function main() {
     let gameOver = false;
     let playerSick = false;
     let waterToDrink = null;
-    let vibrateDuration = 80;
+    let vibrateDuration = 100;
     let alpha = 0;
     let transitionSpeed = 0.02;
 

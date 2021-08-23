@@ -10,10 +10,25 @@
     color: white;
 }
 
-#rulesTxt {
+#rules table {
+    max-width: 85%;
+    margin: 24px 0;
     background-color: wheat;
-    padding: 40px 40px;
-    margin: 32px 54px;
-    border-radius: 6px;
-    line-height: 2;
+}
+
+#rules td, #rules th {
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #222;
+    padding: 12px;
+}
+
+#rules img {
+    width: 42px;
+}
+
+#rules br {
+    display: block;
+    content: "";
+    margin-top: 10px;
 }

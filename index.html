@@ -30,7 +30,7 @@
             <div id="startScreen">
                 <h2>Shotz Kotz</h2>
                 <button id="startGameBtn" disabled="true">Play</button>
-                <h3 id="highscoreTxt">Highscore: <i>loading</i></h3>
+                <h3 id="highscoreTxt"><i>loading highscore ...</i></h3>
                 <i id="rulesBtn" class="fa fa-question-circle"></i>
             </div>
             <h3 id="canvasScore">Score: 0</h3>
@@ -41,27 +41,35 @@
                 <button id="restartGameBtn">Erneut spielen</button>
                 <button id="mainMenuBtn">Hauptmenü</button>
             </div>
-            <div id="leaderboard">
-                <h2>Bestenliste</h2>
-                <table id="highscoreTable">
-                    <thead>
-                        <th>Rank</th>
-                        <th>Name</th>
-                        <th>Score</th>
-                    </thead>
-                    <tbody id="highscoreData"></tbody>
-                </table>
-                <button id="leaderboardBackBtn">Zurück</button>
-            </div>
             <div id="rules">
                 <h2>Rules</h2>
-                 <div id="rulesTxt">
-                     <h3>Ein Shot gibt 1 Punkt.
-                     Wasser zieht ein Leben ab.
-                     Der heftige Shot gibt 5 Punkte.
-                     Anschließend muss solange Wasser getrunken werden, bis ihr nicht mehr übel ist.
-                     Jeglicher Shot während der Übelkeit führt zum Tod und somit zum Spielende.</h3>
-                 </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Drink</th>
+                            <th colspan="2">Zustand des Spielers</th>
+                        </tr>
+                        <tr>
+                            <th>Normal</th>
+                            <th>Übelkeit</th>
+                        </tr>
+                        <tr>
+                            <td><img src="assets/img/shot.png"></td>
+                            <td>+1 Score</td>
+                            <td>Game Over</td>
+                        </tr>
+                        <tr>
+                            <td><img src="assets/img/deadlyShot.png"></td>
+                            <td>+5 Score<br>Übelkeit Effekt</td> 
+                            <td>Game Over</td>
+                        </tr>
+                        <tr>
+                            <td><img src="assets/img/water.png"></td>
+                            <td>-1 Leben</td>
+                            <td>Hilft die Übelkeit zu bekämpfen</td>
+                        </tr>
+                    </thead>
+                </table>
                 <button id="rulesBackBtn">Zurück</button>
             </div>
         </section>
