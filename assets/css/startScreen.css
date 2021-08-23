@@ -37,6 +37,7 @@
 
 #startGameBtn {
     margin-bottom: 12px;
+    opacity: 0.6;
 }
 
 #rulesBtn {
@@ -44,5 +45,5 @@
     font-size: 2.5em;
     top: 20px;
     right: 20px;
-    color: #009879; 
+    color: #009879;
 }

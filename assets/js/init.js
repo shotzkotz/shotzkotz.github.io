@@ -57,12 +57,16 @@ function init() {
     function activateButton() {
         activateButtonCalled += 1;
         if (activateButtonCalled == 2) {
-            document.getElementById("startGameBtn").onclick = function() {
-                $("#startScreen").fadeOut(fadeSpeed);
-                document.getElementById("game").style.display = "block";
-                main();
-            }
+            $("#startGameBtn").css("opacity", "1");
+            document.getElementById("startGameBtn").disabled = false;
         }
+    }
+
+    // Add funtionality to start game button
+    document.getElementById("startGameBtn").onclick = function() {
+        $("#startScreen").fadeOut(fadeSpeed);
+        document.getElementById("game").style.display = "block";
+        main();
     }
 
     // Add functionality to the restart game button
