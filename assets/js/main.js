@@ -34,7 +34,7 @@ function main() {
     let height = drinks[0].y;
 
     // Some variables for delta time
-    const perfectFrameTime = 1000 / 40;
+    const perfectFrameTime = 1000 / 30;
     let deltaTime = 0;
     let lastTimestamp = 0;
 
@@ -120,7 +120,9 @@ function main() {
                         if (!playerSick) {
                             hearts[heartIndex].changeStatus();
                             heartIndex += 1;
-                            navigator.vibrate(vibrateDuration);
+                            if (navigator.vibrate) {
+                                navigator.vibrate(vibrateDuration);
+                            }
                         } else {
                             waterToDrink -= 1;
                             if (waterToDrink == 0) {
@@ -161,7 +163,9 @@ function main() {
             // Check if the game is over
             if (heartIndex == 3) {
                 gameOver = true;
-                navigator.vibrate(vibrateDuration*4);
+                if (navigator.vibrate) {
+                    navigator.vibrate(vibrateDuration*4);
+                }
 
                 // Hide and reset score text
                 document.getElementById("canvasScore").innerHTML = "Score: 0";
