@@ -5,6 +5,7 @@ function main() {
     let player = new Player();
     let hearts = [new Heart(0), new Heart(1), new Heart(2)];
     let heartIndex = 0;
+    let prevScore = 0;
     let score = 0;
     let speed = 8;
     let speedMax = 16;
@@ -15,6 +16,12 @@ function main() {
     let vibrateDuration = 100;
     let alpha = 0;
     let transitionSpeed = 0.02;
+    let vibratePossible = navigator.vibrate;
+    let wh = window.innerHeight;
+    let ww = window.innerWidth;
+    let ratio = wh/images["bg"].height;
+    let dxBg = -(images["bg"].width*ratio)/2+ww/2;
+    let dWidthBg = images["bg"].width*ratio;
 
     // Make sure json data is not a string
     if (typeof(jsonData) == "string") {
@@ -76,8 +83,7 @@ function main() {
         ctx.globalAlpha = alpha;
 
         // Draw the background
-        let ratio = window.innerHeight/images["bg"].height;
-        ctx.drawImage(images["bg"], -(images["bg"].width*ratio)/2+window.innerWidth/2, 0, images["bg"].width*ratio, window.innerHeight);
+        ctx.drawImage(images["bg"], dxBg, 0, dWidthBg, wh);
 
         // Draw the drinks
         drinks.forEach(drink => {
@@ -93,13 +99,15 @@ function main() {
         });
 
         // Draw the score
-        document.getElementById("canvasScore").style.display = "block";
-        document.getElementById("canvasScore").style.opacity = alpha;
+        if (alpha < 1) {
+            document.getElementById("canvasScore").style.display = "block";
+            document.getElementById("canvasScore").style.opacity = alpha;
+        }
     }
 
     function update(dt) {
         // Only update the game when the device is in portrait mode
-        if (window.innerHeight > window.innerWidth) {
+        if (wh > ww) {
             // Update the drink position
             let updatedDrinks = [];
             drinks.forEach(drink => {
@@ -120,7 +128,7 @@ function main() {
                         if (!playerSick) {
                             hearts[heartIndex].changeStatus();
                             heartIndex += 1;
-                            if (navigator.vibrate) {
+                            if (vibratePossible) {
                                 navigator.vibrate(vibrateDuration);
                             }
                         } else {
@@ -145,7 +153,10 @@ function main() {
             });
 
             // Update the score
-            document.getElementById("canvasScore").innerHTML = "Score: " + score;
+            if (score != prevScore) {
+                prevScore = score;
+                document.getElementById("canvasScore").innerHTML = "Score: " + score;
+            }
 
             // Update the position of the drinks and the drinks itself
             height += speed * dt;
