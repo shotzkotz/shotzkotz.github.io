@@ -217,9 +217,11 @@ function main() {
             jsonData["date"] = getFormattedDate();
             $("#highscoreTxt").text("Highscore: " + score);
             $("#highscoreDate").text("(" + jsonData["date"] + " Uhr)");
+            $("#scoreText").css("margin-bottom",  "18px");
             $("#newHighscoreTxt").css("display", "block");
         } else {
             $("#newHighscoreTxt").css("display",  "none");
+            $("#scoreText").css("margin-bottom",  "38px");
         }
 
         // Update the total games counter in the json file
