@@ -133,7 +133,12 @@ function main() {
             }
             else {
                 if (drink.constructor.name == "Shot")
-                    !gameInfo["playerSick"] ? score += 200 : gameInfo["heartIndex"] = 3;
+                    if (!gameInfo["playerSick"]) {
+                        score += 1;
+                        scoreAnimation(1, player);
+                    } else {
+                        gameInfo["heartIndex"] = 3;
+                    }
     
                 else if (drink.constructor.name == "Water") {
                     if (!gameInfo["playerSick"]) {
@@ -153,6 +158,7 @@ function main() {
                 else if (drink.constructor.name == "DeadlyShot") {
                     if (!gameInfo["playerSick"]) {
                         score += 5;
+                        scoreAnimation(5, player);
                         player.image = images["playerSick"];
                         gameInfo["playerSick"] = true;
                         gameInfo["waterToDrink"] = Math.floor(Math.random() * (5 - 2 + 1) ) + 2;
@@ -308,4 +314,16 @@ function getFormattedDate() {
         min = "0" + min;
   
     return (day + "." + month + "." + year + " - " + hour + ":" + min)
+}
+
+
+function scoreAnimation(val, player) {
+    // Create a <p> element near the player
+    let points = $("<p></p>").text("+" + String(val)).addClass("pointsAnimation");
+    points.insertAfter($("#canvasScore"));
+    points.css("left", player.x + player.sizeWidth/1.5);
+    points.css("top", player.y - 40);
+    points[0].addEventListener('animationend', () => {
+        points.remove();
+    });
 }
