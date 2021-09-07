@@ -18,7 +18,7 @@
     
         <!-- Icons -->
         <link rel="shortcut icon" href="assets/img/favicon.ico">
-        <link rel="stylesheet icons" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -27,14 +27,17 @@
         <!-- Main game section -->
         <section id="main">
             <div id="background"></div>
+    
             <div id="startScreen">
                 <h2>Shotz Kotz</h2>
                 <h3 id="highscoreTxt"><i>loading highscore ...</i></h3>
                 <button id="startGameBtn" disabled="true">Play</button>
                 <i id="rulesBtn" class="fa fa-question-circle"></i>
             </div>
+
             <h3 id="canvasScore">Score: 0</h3>
             <canvas id="game"></canvas>
+
             <div id="endScreen">
                 <h2>Game Over</h2>
                 <h3 id="scoreText"></h3>
@@ -42,6 +45,7 @@
                 <button id="restartGameBtn">Erneut spielen</button>
                 <button id="mainMenuBtn">Hauptmenü</button>
             </div>
+
             <div id="rules">
                 <h2>Regeln</h2>
                 <table>
@@ -82,11 +86,11 @@
         </section>
 
         <!-- Javascript -->
+        <script src="assets/js/init.js"></script>
+        <script src="assets/js/main.js"></script>
         <script src="assets/js/eventHandler.js"></script>
         <script src="assets/js/player.js"></script>
         <script src="assets/js/drinks.js"></script>
         <script src="assets/js/heart.js"></script>
-        <script src="assets/js/main.js"></script>
-        <script src="assets/js/init.js"></script>
     </body>
 </html>

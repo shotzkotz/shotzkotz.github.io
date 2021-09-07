@@ -1,3 +1,4 @@
+/* ----- FONT ----- */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
 /* ----- GLOBAL ----- */
@@ -49,6 +50,4 @@ button {
     position: absolute;
     color: white;
     font-size: 1.6em;
-    top: 15px;
-    left: 15px;
 }

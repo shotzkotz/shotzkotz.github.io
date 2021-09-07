@@ -1,212 +1,229 @@
 function main() {
-    // Declare some important variables
-    let canvas = document.getElementById("game");
-    let ctx = canvas.getContext("2d");
-    let player = new Player();
-    let hearts = [new Heart(0), new Heart(1), new Heart(2)];
-    let heartIndex = 0;
-    let prevScore = 0;
-    let score = 0;
-    let speed = 8;
-    let speedMax = 16;
-    let speedIncr = 0.3;
-    let gameOver = false;
-    let playerSick = false;
-    let waterToDrink = null;
-    let vibrateDuration = 100;
-    let alpha = 0;
-    let transitionSpeed = 0.02;
-    let vibratePossible = navigator.vibrate;
-    let wh = window.innerHeight;
-    let ww = window.innerWidth;
-    let ratio = wh/images["bg"].height;
-    let dxBg = -(images["bg"].width*ratio)/2+ww/2;
-    let dWidthBg = images["bg"].width*ratio;
-
     // Make sure json data is not a string
     if (typeof(jsonData) == "string") {
         jsonData = JSON.parse(jsonData);
     }
 
-    // Fetch the highscore
+    // Save game variables
+    let gameInfo = {
+        "speed": 7,
+        "speedMax": 16,
+        "speedIncr": 0.5,
+        "gameOver": false,
+        "heartIndex": 2,
+        "playerSick": false,
+        "waterToDrink": null,
+    }
+
+    // Add margin to hearts and score text
+    let margin = 12;
+    $("#canvasScore").css("top", margin);
+    $("#canvasScore").css("left", margin);
+
+    // Create player, heart and drink instances
+    let player = new Player();
+    let hearts = [new Heart(0, margin), new Heart(1, margin), new Heart(2, margin)];
+    let drinks = generateDrinks(gameInfo["speed"]);
+
+    // Save height of the drinks
+    let drinkHeight = drinks[0].y;
+
+    // (High-)score variables
+    let scoreElement = $("#canvasScore");
+    let score = 0;
+    let prevScore = 0;
     let highscore = jsonData["highscore"];
 
     // Activate the event handler
     eventHandler(player);
 
-    // Generate the first drink wave
-    let drinks = generateDrinks(speed);
-
-    // Save some information for the waves
-    let height = drinks[0].y;
-
-    // Some variables for delta time
-    const perfectFrameTime = 1000 / 30;
+    // Delta time variables
+    const fps = 50;
+    const perfectFrameTime = 1000 / fps;
     let deltaTime = 0;
     let lastTimestamp = 0;
 
-    // Start the main game loop
-    window.requestAnimationFrame(gameLoop);
+    // Fade transition variables
+    let fadeComplete = false;
+    let transitionState = "in";
+    let alpha = 0;
+    let fadeSpeed = 1/(fps*(transitionSpeed/1000));
+
+    // Variables for background positioning
+    let ratio = vh/images["bg"].height;
+    let dxBg = -(images["bg"].width*ratio)/2+vw/2;
+    let dWidthBg = images["bg"].width*ratio;
+
+    // Variables for virbating
+    let vibratePossible = navigator.vibrate;
+    let vibrateDuration = 100;
+
+
     function gameLoop(timestamp) {
         // Update delta time variables
         if (lastTimestamp == 0) {
             deltaTime = 0;
-        }
-        else {
+        } else {
             deltaTime = (timestamp - lastTimestamp) / perfectFrameTime;
         }
         lastTimestamp = timestamp;
 
-        // Upadte the alpha for transitions
-        if (alpha < 1 && !gameOver) {
-            alpha += transitionSpeed;
-        }
-        else if (!gameOver) {
-            alpha = 1;
-        }
-
-        // Draw & update the game components
+        // Call the draw() and update() functions
         draw();
-        if (alpha == 1) {
-            update(deltaTime);
+        if (fadeComplete && !gameInfo["gameOver"] && vh > vw) {
+            update();
         }
 
-        // Continue the game unitl it is over
-        if (!gameOver) {
+        // Request a new frame
+        if (!gameInfo["gameOver"] || alpha > 0) {
             window.requestAnimationFrame(gameLoop);
         }
+
+        // Check if game is over and transition is complete
+        if (gameInfo["gameOver"] && transitionState == "out" && alpha == 0) {
+            gameOver();
+        }
     }
+    window.requestAnimationFrame(gameLoop);
 
     function draw() {
-        // Make a transition
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, vw, vh);
         ctx.globalAlpha = alpha;
 
         // Draw the background
-        ctx.drawImage(images["bg"], dxBg, 0, dWidthBg, wh);
+        ctx.drawImage(images["bg"], dxBg, 0, dWidthBg, vh);
+    
+        // Draw the hearts
+        hearts.forEach(heart => {
+            heart.draw();
+        });
 
         // Draw the drinks
         drinks.forEach(drink => {
-            drink.draw(ctx);
+            drink.draw();
         });
 
         // Draw the player
-        player.draw(ctx);
-
-        // Draw the hearts
-        hearts.forEach(heart => {
-            heart.draw(ctx);
-        });
+        player.draw();
 
         // Draw the score
         if (alpha < 1) {
-            document.getElementById("canvasScore").style.display = "block";
-            document.getElementById("canvasScore").style.opacity = alpha;
+            scoreElement.css("display", "block");
+            scoreElement.css("opacity", alpha);
+        }
+
+        // Update transition variables
+        alpha += fadeSpeed;
+        if (alpha >= 1 && transitionState == "in") {
+            alpha = 1;
+            fadeComplete = true;
+        } 
+        else if (alpha <= 0 && transitionState == "out") {
+            alpha = 0;
+            fadeComplete = true;
         }
     }
 
-    function update(dt) {
-        // Only update the game when the device is in portrait mode
-        if (wh > ww) {
-            // Update the drink position
-            let updatedDrinks = [];
-            drinks.forEach(drink => {
-                drink.update(dt);
-                if (!drink.collisionCheck(player)) {
-                    updatedDrinks.push(drink);
-                }
-                else {
-                    // Check which drink hit the player
-                    if (drink.constructor.name == "Shot") {
-                        if (!playerSick) {
-                            score += 1;
-                        } else {
-                            heartIndex = 3;
+    function update() {
+        // Update the drinks and check for collision
+        let updatedDrinks = [];
+        drinks.forEach(drink => {
+            drink.update(deltaTime);
+            if (!drink.collisionCheck(player)) {
+                updatedDrinks.push(drink);
+            }
+            else {
+                if (drink.constructor.name == "Shot")
+                    !gameInfo["playerSick"] ? score += 1 : gameInfo["heartIndex"] = 3;
+    
+                else if (drink.constructor.name == "Water") {
+                    if (!gameInfo["playerSick"]) {
+                        hearts[gameInfo["heartIndex"]].changeStatus();
+                        gameInfo["heartIndex"] += 1;
+                        if (vibratePossible)
+                            navigator.vibrate(vibrateDuration);
+                    } else {
+                        gameInfo["waterToDrink"] -= 1;
+                        if (gameInfo["waterToDrink"] == 0) {
+                            gameInfo["playerSick"] = false;
+                            player.image = images["player"];
                         }
                     }
-                    else if (drink.constructor.name == "Water") {
-                        if (!playerSick) {
-                            hearts[heartIndex].changeStatus();
-                            heartIndex += 1;
-                            if (vibratePossible) {
-                                navigator.vibrate(vibrateDuration);
-                            }
-                        } else {
-                            waterToDrink -= 1;
-                            if (waterToDrink == 0) {
-                                playerSick = false;
-                                player.image = images["player"];
-                            }
-                        }
-                    }
-                    else if (drink.constructor.name == "DeadlyShot") {
-                        if (!playerSick) {
-                            score += 5;
-                            player.image = images["playerSick"];
-                            playerSick = true;
-                            waterToDrink = Math.floor(Math.random() * (5 - 2 + 1) ) + 2;
-                        } else {
-                            heartIndex = 3;
-                        }       
-                    }
-                }
-            });
-
-            // Update the score
-            if (score != prevScore) {
-                prevScore = score;
-                document.getElementById("canvasScore").innerHTML = "Score: " + score;
-            }
-
-            // Update the position of the drinks and the drinks itself
-            height += speed * dt;
-            drinks = updatedDrinks;
-
-            // Check if drinks are below the screen
-            if (height > 1000) {
-                drinks = generateDrinks(speed);
-                height = drinks[0].y;
-                if (speed < speedMax) {
-                    speed += speedIncr;
-                }     
-            }
-
-            // Check if the game is over
-            if (heartIndex == 3) {
-                gameOver = true;
-                if (navigator.vibrate) {
-                    navigator.vibrate(vibrateDuration*4);
                 }
 
-                // Hide and reset score text
-                document.getElementById("canvasScore").innerHTML = "Score: 0";
-                document.getElementById("canvasScore").style.display = "none";
-
-                // Fade in the endscreen
-                document.getElementById("game").style.display = "none";
-                $("#endScreen").hide().fadeIn(fadeSpeed);
-                $("#endScreen").css("display", "flex");
-                document.getElementById("scoreText").innerHTML = "Dein Score: " + String(score);
-
-                // Save new highscore if beaten
-                if (score > highscore) {
-                    jsonData["highscore"] = score;
-                    document.getElementById("highscoreTxt").innerHTML = "Highscore: " + score;
-                    $("#newHighscoreTxt").css("display", "block");
-                } else {
-                    $("#newHighscoreTxt").css("display",  "none");
+                else if (drink.constructor.name == "DeadlyShot") {
+                    if (!gameInfo["playerSick"]) {
+                        score += 5;
+                        player.image = images["playerSick"];
+                        gameInfo["playerSick"] = true;
+                        gameInfo["waterToDrink"] = Math.floor(Math.random() * (5 - 2 + 1) ) + 2;
+                    } else {
+                        gameInfo["heartIndex"] = 3;
+                    }       
                 }
-
-                // Update the json file
-                jsonData = JSON.stringify(jsonData);
-                let req = new XMLHttpRequest();
-                req.open("PUT", urlJSON.slice(0, urlJSON.length-7), true);
-                req.setRequestHeader("Content-Type", "application/json");
-                req.send(jsonData);
             }
-        }   
+        });
+        drinkHeight += gameInfo["speed"] * deltaTime;
+        drinks = updatedDrinks;
+
+        // Update the score
+        if (score != prevScore) {
+            prevScore = score;
+            $("#canvasScore").text("Score: " + score);
+        }
+
+        // Check if drinks are below the screen
+        if (drinkHeight > 900) {
+            drinks = generateDrinks(gameInfo["speed"]);
+            drinkHeight = drinks[0].y;
+            if (gameInfo["speed"] < gameInfo["speedMax"]) {
+                gameInfo["speed"] += gameInfo["speedIncr"];
+            }     
+        }
+
+        // Check if the game is over
+        if (gameInfo["heartIndex"] == 3) {
+            if (navigator.vibrate)
+                navigator.vibrate(vibrateDuration*4);
+
+            gameInfo["gameOver"] = true;
+            fadeComplete = false;
+            transitionState = "out";
+            fadeSpeed = -fadeSpeed;
+        }
+    }
+
+    function gameOver() {
+        // Hide the score element
+        scoreElement.css("display", "none");
+        scoreElement.text("Score: 0");
+    
+        // Fade in end screen
+        canvas.css("display", "none");
+        $("#endScreen").css("display", "flex");
+        $("#endScreen").hide().fadeIn(transitionSpeed);
+
+        // Update score
+        $("#scoreText").text("Dein Score: " + String(score));
+
+        // Save new highscore if beaten
+        if (score > highscore) {
+            jsonData["highscore"] = score;
+            document.getElementById("highscoreTxt").innerHTML = "Highscore: " + score;
+            $("#newHighscoreTxt").css("display", "block");
+        } else {
+            $("#newHighscoreTxt").css("display",  "none");
+        }
+
+        // Update the json file
+        jsonData = JSON.stringify(jsonData);
+        let req = new XMLHttpRequest();
+        req.open("PUT", urlJSON.slice(0, urlJSON.length-7), true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.send(jsonData);
     }
 }
+
 
 function generateDrinks(speed) { 
     let drinks = [];

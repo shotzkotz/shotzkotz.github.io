@@ -16,7 +16,7 @@ class Player {
         this.y = window.innerHeight - this.sizeHeight - window.innerHeight/40;
     }
 
-    draw(ctx) {
+    draw() {
         ctx.drawImage(this.image, this.x, this.y, this.sizeWidth, this.sizeHeight);
     }
 

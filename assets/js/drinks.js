@@ -17,7 +17,7 @@ class Drink {
         this.speed = speed;
     }
 
-    draw(ctx) {
+    draw() {
         ctx.drawImage(this.image, this.x, this.y, this.sizeWidth, this.sizeHeight);
     }
 
