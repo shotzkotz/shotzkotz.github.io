@@ -1,6 +1,7 @@
 // Global variables
 images = {}
 transitionSpeed = 200;
+margin = 12;
 
 vw = window.innerWidth;
 vh = window.innerHeight;
@@ -54,12 +55,17 @@ function init() {
     function fetchJSON() {
         $.getJSON(urlJSON, function(data) {
             jsonData = data;
-            document.getElementById("highscoreTxt").innerHTML = "Highscore: " + jsonData["highscore"];
+            $("#highscoreTxt").text("Highscore: " + jsonData["highscore"]);
+            $("#highscoreDate").text("(" + jsonData["date"] + " Uhr)");
         }).done(function() {
             activateButtonCalled += 1;
             activateButton(activateButtonCalled);
         });
     }
+
+    // Position the rules button
+    $("#rulesBtn").css("top", margin);
+    $("#rulesBtn").css("right", margin);
 }
 
 

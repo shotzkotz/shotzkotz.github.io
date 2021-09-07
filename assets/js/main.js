@@ -6,8 +6,8 @@ function main() {
 
     // Save game variables
     let gameInfo = {
-        "speed": 7,
-        "speedMax": 16,
+        "speed": 6,
+        "speedMax": 11,
         "speedIncr": 0.5,
         "gameOver": false,
         "heartIndex": 0,
@@ -16,7 +16,6 @@ function main() {
     }
 
     // Add margin to hearts and score text
-    let margin = 12;
     $("#canvasScore").css("top", margin);
     $("#canvasScore").css("left", margin);
 
@@ -209,7 +208,9 @@ function main() {
         // Save new highscore if beaten
         if (score > highscore) {
             jsonData["highscore"] = score;
-            document.getElementById("highscoreTxt").innerHTML = "Highscore: " + score;
+            jsonData["date"] = getFormattedDate();
+            $("#highscoreTxt").text("Highscore: " + score);
+            $("#highscoreDate").text("(" + jsonData["date"] + " Uhr)");
             $("#newHighscoreTxt").css("display", "block");
         } else {
             $("#newHighscoreTxt").css("display",  "none");
@@ -269,4 +270,25 @@ function generateDrinks(speed) {
         }
         return false;
     }
+}
+
+
+function getFormattedDate() {
+    let d = new Date();
+    let day = String(d.getDate());
+    let month = String(d.getMonth()+1);
+    let year = String(d.getFullYear());
+    let hour = String(d.getHours());
+    let min = String(d.getMinutes());
+  
+    if (day.length === 1)
+        day = "0" + day;
+    if (month.length === 1)
+        month = "0" + month;
+    if (hour.length === 1)
+        hour = "0" + hour;
+    if (min.length === 1)
+        min = "0" + min;
+  
+    return (day + "." + month + "." + year + " - " + hour + ":" + min)
 }

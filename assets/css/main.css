@@ -5,9 +5,6 @@
 html, body {
     height: 100%;
     overflow: hidden;
-}
-
-h2, h3, table {
     font-family: 'Noto Sans JP', sans-serif;
 }
 
