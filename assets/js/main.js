@@ -10,7 +10,7 @@ function main() {
         "speedMax": 16,
         "speedIncr": 0.5,
         "gameOver": false,
-        "heartIndex": 2,
+        "heartIndex": 0,
         "playerSick": false,
         "waterToDrink": null,
     }

@@ -1,6 +1,6 @@
 // Global variables
 images = {}
-transitionSpeed = 320;
+transitionSpeed = 200;
 
 vw = window.innerWidth;
 vh = window.innerHeight;
@@ -21,7 +21,6 @@ function init() {
     addBtnOnclicks();
     loadImages();
     fetchJSON();
-    addGlobalEvents();
 
     // Pre-load all imaages
     function loadImages() {
@@ -132,14 +131,6 @@ function activateButton(calls) {
     }
 }
 
-
-// Add global event listeners
-function addGlobalEvents() {
-    window.addEventListener("orientationchange", function() {
-        vw = window.innerWidth;
-        vh = window.innerHeight;
-    });
-}
 
 // Call the init() function when the document is ready
 $(document).ready(function() {
