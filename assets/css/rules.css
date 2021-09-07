@@ -6,8 +6,16 @@
 }
 
 #rules h2 {
-    font-size: 42px;
+    font-size: 12vw;
     color: white;
+    text-shadow: 4px 4px #121212;
+}
+
+#rules h3 {
+    font-size: 4.7vw;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 24px;
 }
 
 #rules table {
@@ -21,6 +29,7 @@
     text-align: center;
     border: 1px solid #222;
     padding: 12px;
+    line-height: 1.4;
 }
 
 #rules img {

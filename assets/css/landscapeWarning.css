@@ -1,7 +1,3 @@
-html, body {
-    height: 100%;
-}
-
 #main {
     display: none;
 }
@@ -16,4 +12,5 @@ html, body {
 
     line-height: 1.8;
     font-size: 26px;
+    text-align: center;
 }

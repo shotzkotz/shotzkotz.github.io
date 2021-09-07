@@ -133,7 +133,7 @@ function main() {
             }
             else {
                 if (drink.constructor.name == "Shot")
-                    !gameInfo["playerSick"] ? score += 1 : gameInfo["heartIndex"] = 3;
+                    !gameInfo["playerSick"] ? score += 200 : gameInfo["heartIndex"] = 3;
     
                 else if (drink.constructor.name == "Water") {
                     if (!gameInfo["playerSick"]) {
@@ -215,6 +215,23 @@ function main() {
         } else {
             $("#newHighscoreTxt").css("display",  "none");
         }
+
+        // Update the total games counter in the json file
+        jsonData["gamesPlayed"] += 1;
+
+        // Local storage operations
+        if (!localStorage.getItem("playedTheGame")) {       
+            localStorage.setItem("playedTheGame", true);
+            jsonData["deviceCount"] += 1;
+        }
+
+        if (localStorage.getItem("userGamesPlayed")) {
+            let count = localStorage.getItem("userGamesPlayed");
+            localStorage.setItem("userGamesPlayed", parseInt(count)+1);
+        } else {
+            localStorage.setItem("userGamesPlayed", 1);
+        }
+        $("#userGamesPlayed").text("Du hast bereits " + localStorage.getItem("userGamesPlayed") + " mal gespielt!");
 
         // Update the json file
         jsonData = JSON.stringify(jsonData);

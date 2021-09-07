@@ -9,15 +9,23 @@
 }
 
 #startScreen h3 {
-    font-size: 26px;
+    font-size: 8vw;
     margin-top: 36px;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
     border-radius: 5px;
+    color: #010101;
+    text-shadow: 1px 1px #EEE;
 }
 
 #startScreen h4 {
-    font-size: 18px;
+    font-size: 6vw;
     margin-bottom: 36px;
+    color: #EEE;
+    text-shadow: 2px 2px #121212;
+}
+
+#startScreen h5 {
+    position: absolute;
 }
 
 #startGameBtn {

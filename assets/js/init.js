@@ -18,7 +18,7 @@ function init() {
 
     // Call all init functions
     resizeCanvas();
-    //!!addRefreshWarning();
+    addRefreshWarning();
     addBtnOnclicks();
     loadImages();
     fetchJSON();
@@ -63,9 +63,18 @@ function init() {
         });
     }
 
-    // Position the rules button
+    // Position the rules button and the hint at the bottom
     $("#rulesBtn").css("top", margin);
     $("#rulesBtn").css("right", margin);
+    $("#userGamesPlayed").css("bottom", margin);
+    $("#userGamesPlayed").css("left", margin);
+
+    // Add information from local storgage
+    let gamesCount = 0;
+    if (localStorage.getItem("userGamesPlayed")) {
+        gamesCount = localStorage.getItem("userGamesPlayed");
+    }
+    $("#userGamesPlayed").text("Du hast bereits " + gamesCount + " mal gespielt!");
 }
 
 

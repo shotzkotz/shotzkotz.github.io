@@ -5,24 +5,32 @@
     justify-content: center;
     align-items: center;
 
-    line-height: 2;
-    font-size: 32px;
+    text-align: center;
 }
 
 #endScreen h2 {
     color: white;
-    font-size: 52px;
+    text-shadow: 4px 4px #121212;
+    font-size: 14vw;
+    line-height: 1.2;
+    margin-top: 16vh;
+}
+
+#endScreen h3 {
+    font-size: 8vw;
+    margin-top: 38px;
+    margin-bottom: 18px;
 }
 
 #endScreen #newHighscoreTxt {
     display: none;
-    font-size: 18px;
-    color: darkred;
+    font-size: 5vw;
+    color: rgb(206, 0, 0);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     text-transform: uppercase;
+    margin-bottom: 38px;
 }
 
 #restartGameBtn {
-    margin-top: 18px;
-    margin-bottom: 24px;
+    margin-bottom: 12px;
 }
