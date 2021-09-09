@@ -15,7 +15,7 @@ ctx = canvas[0].getContext("2d");
 
 function init() {
     let activateButtonCalled = 0;
-    console.log(navigator.userAgent);
+
     // Call all init functions
     resizeCanvas();
     addRefreshWarning();
