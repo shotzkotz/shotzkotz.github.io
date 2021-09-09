@@ -15,7 +15,7 @@ ctx = canvas[0].getContext("2d");
 
 function init() {
     let activateButtonCalled = 0;
-
+    console.log(navigator.userAgent);
     // Call all init functions
     resizeCanvas();
     addRefreshWarning();
@@ -38,8 +38,8 @@ function init() {
         ]
         for (let i = 0; i < imageLinks.length; i++) {
             let img = new Image();
-            img.src = item[1];
-            images[item[0]] = img;
+            img.src = imageLinks[i][1];
+            images[imageLinks[i][0]] = img;
     
             img.onload = function() {
                 imagesLoaded += 1;

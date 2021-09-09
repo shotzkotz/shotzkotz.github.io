@@ -325,7 +325,7 @@ function scoreAnimation(val, player) {
     points.insertAfter($("#canvasScore"));
     points.css("left", player.x + player.sizeWidth/1.5);
     points.css("top", player.y - 40);
-    points[0].addEventListener('animationend', () => {
+    points[0].addEventListener('animationend', function() {
         points.remove();
     });
 }
