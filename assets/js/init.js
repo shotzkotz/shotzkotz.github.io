@@ -36,7 +36,7 @@ function init() {
             ["bg", "assets/img/bg.png"],
             ["playerSick", "assets/img/playerSick.png"],
         ]
-        imageLinks.forEach(item => {
+        for (let i = 0; i < imageLinks.length; i++) {
             let img = new Image();
             img.src = item[1];
             images[item[0]] = img;
@@ -48,7 +48,7 @@ function init() {
                     activateButton(activateButtonCalled);
                 }
             }
-        });
+        }
     }
 
     // Fetch data from the json file

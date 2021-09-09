@@ -93,14 +93,14 @@ function main() {
         ctx.drawImage(images["bg"], dxBg, 0, dWidthBg, vh);
     
         // Draw the hearts
-        hearts.forEach(heart => {
-            heart.draw();
-        });
+        for (let i = 0; i < hearts.length; i++) {
+            hearts[i].draw();
+        }
 
         // Draw the drinks
-        drinks.forEach(drink => {
-            drink.draw();
-        });
+        for (let i = 0; i < drinks.length; i++) {
+            drinks[i].draw();
+        }
 
         // Draw the player
         player.draw();
@@ -126,13 +126,13 @@ function main() {
     function update() {
         // Update the drinks and check for collision
         let updatedDrinks = [];
-        drinks.forEach(drink => {
-            drink.update(deltaTime);
-            if (!drink.collisionCheck(player)) {
-                updatedDrinks.push(drink);
+        for (let i = 0; i < drinks.length; i++) {
+            drinks[i].update(deltaTime);
+            if (!drinks[i].collisionCheck(player)) {
+                updatedDrinks.push(drinks[i]);
             }
             else {
-                if (drink.constructor.name == "Shot")
+                if (drinks[i].constructor.name == "Shot")
                     if (!gameInfo["playerSick"]) {
                         score += 1;
                         scoreAnimation(1, player);
@@ -140,7 +140,7 @@ function main() {
                         gameInfo["heartIndex"] = 3;
                     }
     
-                else if (drink.constructor.name == "Water") {
+                else if (drinks[i].constructor.name == "Water") {
                     if (!gameInfo["playerSick"]) {
                         hearts[gameInfo["heartIndex"]].changeStatus();
                         gameInfo["heartIndex"] += 1;
@@ -167,7 +167,7 @@ function main() {
                     }       
                 }
             }
-        });
+        }
         drinkHeight += gameInfo["speed"] * deltaTime;
         drinks = updatedDrinks;
 
@@ -281,14 +281,14 @@ function generateDrinks(speed) {
         let waterCount = 0;
         let shotCount = 0;
 
-        drinks.forEach(drink => {
-            if (drink instanceof Water) {
+        for (let i = 0; i < drinks.length; i++) {
+            if (drinks[i] instanceof Water) {
                 waterCount += 1;
             }
-            if (drink instanceof Shot || drink instanceof DeadlyShot) {
+            if (drinks[i] instanceof Shot || drinks[i] instanceof DeadlyShot) {
                 shotCount += 1;
             }
-        });
+        }
 
         if (shotCount == 3 || waterCount == 3) {
             return true;
