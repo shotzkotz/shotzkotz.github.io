@@ -155,7 +155,7 @@ function main() {
                     }
                 }
 
-                else if (drink.constructor.name == "DeadlyShot") {
+                else if (drinks[i].constructor.name == "DeadlyShot") {
                     if (!gameInfo["playerSick"]) {
                         score += 5;
                         scoreAnimation(5, player);
